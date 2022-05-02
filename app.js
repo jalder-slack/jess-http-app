@@ -17,7 +17,7 @@ app.message('hello', async ({ message, say }) => {
 app.command('/start', async ({ command, ack, respond, client }) => {
   // Acknowledge command request
   await ack();
-  console.log(command)
+  console.log(command);
 
   client.chat.postMessage({
     channel: "C02NCBQS1PV",
@@ -94,7 +94,6 @@ app.action('button-action-modal-0', async ({ body, ack, client }) => {
           "text": {
             "type": "mrkdwn",
             "text": `This is a modal, and here is the button callback payload: \`\`\`<${JSON.stringify(body)}>`,
-            "emoji": true
           }
         }
       ]
