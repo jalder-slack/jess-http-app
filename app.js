@@ -93,7 +93,7 @@ app.action('button-action-modal-0', async ({ body, ack, client }) => {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": `This is a modal, and here is the button callback payload: \`\`\`<${JSON.stringify(body)}>`,
+            "text": `This is a modal, and here is the button callback payload: /n\`\`\`/n<${JSON.stringify(body)}>`,
           }
         }
       ]
