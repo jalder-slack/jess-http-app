@@ -7,7 +7,7 @@ const app = new App({
 });
 
 //#region Events
-app.message('hello', ({ message, say }) => {
+app.message('hello', async ({ message, say }) => {
   await say(`hey there, <@${message.user}`)
 });
 //#endregion
