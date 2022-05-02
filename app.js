@@ -93,7 +93,7 @@ app.action('button-action-modal-0', async ({ body, ack, client }) => {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": `This is a modal, and here is the button callback payload:\n \`\`\`<${JSON.stringify(body)}>\`\`\``,
+            "text": `This is a modal, and here is the button callback payload:\n \`\`\`${JSON.stringify(body)}\`\`\``,
           }
         }
       ]
@@ -114,16 +114,13 @@ app.action('button-action-dialog-0', async ({ body, ack, client }) => {
       "notify_on_cancel": true,
       "state": "Limo",
       "elements": [
-          {
-              "type": "text",
-              "label": "Pickup Location",
-              "name": "loc_origin"
-          },
-          {
-              "type": "text",
-              "label": "Dropoff Location",
-              "name": "loc_destination"
-          }
+        {
+          "label": "Callback Payload",
+          "name": "payload",
+          "type": "text",
+          "placeholder": `Some text`,
+          "value": `${JSON.stringify(body)}`
+        }
       ]
     }
   });
