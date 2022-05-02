@@ -93,8 +93,8 @@ app.action('button-action-modal-0', async ({ body, ack, client }) => {
         {
           "type": "section",
           "text": {
-            "type": "plain_text",
-            "text": `This is a modal, and here is the button callback payload: \`\`\`<${body}>`,
+            "type": "mrkdwn",
+            "text": `This is a modal, and here is the button callback payload: \`\`\`<${JSON.stringify(body)}>`,
             "emoji": true
           }
         }
@@ -104,9 +104,31 @@ app.action('button-action-modal-0', async ({ body, ack, client }) => {
 });
 
 // Your listener function will be called every time an interactive component with the action_id "approve_button" is triggered
-app.action('button-action-dialog-0', async ({ ack }) => {
+app.action('button-action-dialog-0', async ({ body, ack, client }) => {
   await ack();
   // Update the message to reflect the action
+  client.dialog.open({
+    trigger_id: body.trigger_id,
+    dialog: {
+      "callback_id": "button-dialog-open",
+      "title": "This is a Dialog",
+      "submit_label": "Submit",
+      "notify_on_cancel": true,
+      "state": "Limo",
+      "elements": [
+          {
+              "type": "text",
+              "label": "Pickup Location",
+              "name": "loc_origin"
+          },
+          {
+              "type": "text",
+              "label": "Dropoff Location",
+              "name": "loc_destination"
+          }
+      ]
+    }
+  });
 });
 //#endregion
 
