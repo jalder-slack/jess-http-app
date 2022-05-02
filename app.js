@@ -62,6 +62,51 @@ app.command('/start', async ({ command, ack, respond, client }) => {
 });
 //#endregion
 
+//#region Actions
+// Your listener function will be called every time an interactive component with the action_id "approve_button" is triggered
+app.action('button-action-modal-0', async ({ trigger_id, ack, client }) => {
+  await ack();
+
+  // Open a modal
+  client.chat.views.open({
+    trigger_id: trigger_id,
+    view: {
+      "type": "modal",
+      "title": {
+        "type": "plain_text",
+        "text": "My App",
+        "emoji": true
+      },
+      "submit": {
+        "type": "plain_text",
+        "text": "Submit",
+        "emoji": true
+      },
+      "close": {
+        "type": "plain_text",
+        "text": "Cancel",
+        "emoji": true
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "plain_text",
+            "text": "This is a modal, and it's payload: ",
+            "emoji": true
+          }
+        }
+      ]
+    }
+  });
+});
+
+// Your listener function will be called every time an interactive component with the action_id "approve_button" is triggered
+app.action('button-action-dialog-0', async ({ ack }) => {
+  await ack();
+  // Update the message to reflect the action
+});
+//#endregion
 
 
 (async () => {
