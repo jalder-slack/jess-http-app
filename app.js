@@ -63,13 +63,15 @@ app.command('/start', async ({ command, ack, respond, client }) => {
 //#endregion
 
 //#region Actions
-// Your listener function will be called every time an interactive component with the action_id "approve_button" is triggered
-app.action('button-action-modal-0', async ({ trigger_id, ack, client }) => {
+
+// Your listener function will be called every time an interactive component with the action_id "button-action-modal-0" 
+// is triggered
+app.action('button-action-modal-0', async ({ body, ack, client }) => {
   await ack();
 
   // Open a modal
   client.views.open({
-    trigger_id: trigger_id,
+    trigger_id: body.trigger_id,
     view: {
       "type": "modal",
       "title": {
