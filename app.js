@@ -94,7 +94,7 @@ app.action('button-action-modal-0', async ({ body, ack, client }) => {
           "type": "section",
           "text": {
             "type": "plain_text",
-            "text": "This is a modal, and it's payload: ",
+            "text": `This is a modal, and here is the button callback payload: \`\`\`<${body}>`,
             "emoji": true
           }
         }
