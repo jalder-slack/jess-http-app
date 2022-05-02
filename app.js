@@ -119,7 +119,7 @@ app.action('button-action-dialog-0', async ({ body, ack, client }) => {
           "name": "payload",
           "type": "text",
           "placeholder": `Some text`,
-          "value": `${JSON.stringify(body)}`
+          "value": `${JSON.stringify(body).slice(0, 147) + '...'}`
         }
       ]
     }
