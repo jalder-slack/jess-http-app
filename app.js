@@ -68,7 +68,7 @@ app.action('button-action-modal-0', async ({ trigger_id, ack, client }) => {
   await ack();
 
   // Open a modal
-  client.chat.views.open({
+  client.views.open({
     trigger_id: trigger_id,
     view: {
       "type": "modal",
