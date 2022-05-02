@@ -21,6 +21,7 @@ app.command('/start', async ({ command, ack, respond, client }) => {
 
   client.chat.postMessage({
     channel: "C02NCBQS1PV",
+    text: "Click the buttons to open a modal or dialog!",
     blocks: [
       {
         "type": "section",
@@ -58,8 +59,6 @@ app.command('/start', async ({ command, ack, respond, client }) => {
       }
     ]
   });
-
-  await respond(`${command.text}`);
 });
 //#endregion
 
