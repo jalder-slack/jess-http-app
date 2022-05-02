@@ -6,11 +6,64 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
+//#region Events
 app.message('hello', ({ message, say }) => {
-
   await say(`hey there, <@${message.user}`)
-
 });
+//#endregion
+
+//#region Commands
+// The echo command simply echoes on command
+app.command('/start', async ({ command, ack, respond, client }) => {
+  // Acknowledge command request
+  await ack();
+  console.log(command)
+
+  client.chat.postMessage({
+    channel: "C02NCBQS1PV",
+    blocks: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "Click the button to open a Modal!"
+        },
+        "accessory": {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Open Modal",
+            "emoji": true
+          },
+          "value": "open_modal_0",
+          "action_id": "button-action-modal-0"
+        }
+      },
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "Click the button to open a Dialog"
+        },
+        "accessory": {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Open Dialog",
+            "emoji": true
+          },
+          "value": "open_dialog_0",
+          "action_id": "button-action-dialog-0"
+        }
+      }
+    ]
+  });
+
+  await respond(`${command.text}`);
+});
+//#endregion
+
+
 
 (async () => {
   // Start your app
