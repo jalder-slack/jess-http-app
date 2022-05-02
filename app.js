@@ -63,7 +63,6 @@ app.command('/start', async ({ command, ack, respond, client }) => {
 //#endregion
 
 //#region Actions
-
 // Your listener function will be called every time an interactive component with the action_id "button-action-modal-0" 
 // is triggered
 app.action('button-action-modal-0', async ({ body, ack, client }) => {
@@ -132,6 +131,43 @@ app.action('button-action-dialog-0', async ({ body, ack, client }) => {
 });
 //#endregion
 
+//#region App Home
+// Triggers whenever the App Home page for this app is opened.
+app.event('app_home_opened', async ({ event, client, logger }) => {
+  try {
+    // Call views.publish with the built-in client
+    const result = await client.views.publish({
+      // Use the user ID associated with the event
+      user_id: event.user,
+      view: {
+        // Home tabs must be enabled in your app configuration page under "App Home"
+        "type": "home",
+        "blocks": [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*Welcome home, <@" + event.user + "> :house:*"
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "Learn how home tabs can be more useful and interactive <https://api.slack.com/surfaces/tabs/using|*in the documentation*>."
+            }
+          }
+        ]
+      }
+    });
+
+    logger.info(result);
+  }
+  catch (error) {
+    logger.error(error);
+  }
+});
+//#endregion
 
 (async () => {
   // Start your app
