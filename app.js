@@ -20,7 +20,7 @@ app.command('/start', async ({ command, ack, respond, client }) => {
   console.log(command);
 
   client.chat.postMessage({
-    channel: "C02NCBQS1PV",
+    channel: `${command.channel_id}`,
     text: "Click the buttons to open a modal or dialog!",
     blocks: [
       {
